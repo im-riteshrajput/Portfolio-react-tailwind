@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+html, body {
+    overflow-x: hidden;
+}
+
+/* ─── Global Smoothness ─────────────────────────────────────────── */
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+
+@theme {
+    --font-sans: "JetBrains Mono", "Courier New", monospace;
+    --font-mono: "JetBrains Mono", monospace;
+    --font-display: "Chivo", sans-serif;
+}
+
+/* HUD tactical grid overlay */
+.hud-grid {
+    background-image:
+        linear-gradient(rgba(251, 54, 65, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(251, 54, 65, 0.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* CRT scanline sweep animation */
+.scanline {
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+    );
+}
+
+/* Animated sweep line that moves down the screen */
+.scanline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(251, 54, 65, 0.25),
+        transparent
+    );
+    animation: scanSweep 6s linear infinite;
+}
+
+@keyframes scanSweep {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+}
+
+/* Card float animation — moved from inline <style> for caching */
+@keyframes cardFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-16px); }
+    100% { transform: translateY(0px); }
+}
